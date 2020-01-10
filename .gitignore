@@ -1,15 +1,11 @@
-logs
-target
-/.idea
-/.idea_modules
-/.classpath
-/.project
-/.settings
-/RUNNING_PID
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+hs_err_pid14665.log
+logs/
+project/project/
+project/target/
+target/
 
-build.gradle
-obasapi.iml
-gradlew
-gradlew.bat
-/.gradle
+# @caniksea's playground to be ignored
 /playground.sc
+

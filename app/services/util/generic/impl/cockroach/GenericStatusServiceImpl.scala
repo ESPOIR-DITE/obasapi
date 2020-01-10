@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import domain.util.generic.GenericStatus
 import repository.util.generic.GenericStatusRepository
 import services.util.generic.GenericStatusService
-import util.{GenericLookupData, HelperUtil}
+import util.GenericLookupData
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -13,8 +13,7 @@ import scala.concurrent.Future
 class GenericStatusServiceImpl extends GenericStatusService{
 
   override def saveEntity(entity: GenericStatus): Future[Option[GenericStatus]] = {
-    val copy = entity.copy(id = HelperUtil.codeGen(entity.name + LocalDateTime.now))
-    GenericStatusRepository.roach.saveEntity(copy)
+    GenericStatusRepository.roach.saveEntity(entity)
   }
 
   override def getEntities: Future[Seq[GenericStatus]] = {

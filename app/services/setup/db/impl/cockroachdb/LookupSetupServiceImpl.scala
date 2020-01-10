@@ -1,5 +1,6 @@
 package services.setup.db.impl.cockroachdb
 
+import services.application.ApplicantTypeService
 import services.setup.db.LookupSetupService
 import services.util.generic.GenericStatusService
 
@@ -12,7 +13,12 @@ class LookupSetupServiceImpl extends LookupSetupService {
     results <- GenericStatusService.roach.createInitialData
   } yield results.forall( _ == true)
 
+  def loadGenericApplicantTypeData(): Future[Boolean] = for {
+    results <- ApplicantTypeService.roach.createInitialData
+  } yield results.forall( _ == true)
+
   override def loadLookupData: Future[Boolean] = {
     loadGenericStatusLookupData()
+    loadGenericApplicantTypeData()
   }
 }

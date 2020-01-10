@@ -38,16 +38,22 @@ javaOptions in Universal ++= Seq(
   "-J-Xmn2g"
 )
 
+
 val PhantomVersion = "2.42.0"
-val PlayFrameWorkVersion = "2.7.3"
-val catsVersion = "1.6.1"
-val circeVersion = "0.12.0-M4"
-val TwitterChillVersion = "0.9.3"
-val MoshiVersion ="1.8.0"
-val softwaremillSttpVersion = "1.6.4"
+val PlayFrameWorkVersion = "2.8.0"
+val catsVersion = "2.1.0"
+val circeVersion = "0.12.3"
+val TwitterChillVersion = "0.9.4"
+val MoshiVersion = "1.8.0"
+val softwaremillSttpVersion = "1.7.2"
 
 
-libraryDependencies ++= Seq("io.circe" %% "circe-core", "io.circe" %% "circe-generic", "io.circe" %% "circe-parser"
+
+
+libraryDependencies ++= Seq(
+  "io.circe" %% "circe-core",
+  "io.circe" %% "circe-generic",
+  "io.circe" %% "circe-parser"
 ).map(_ % circeVersion)
 
 libraryDependencies += "com.outworkers" % "phantom-dsl_2.12" % PhantomVersion
@@ -68,42 +74,42 @@ libraryDependencies += "org.typelevel" % "cats-core_2.12" % catsVersion
 
 // https://mvnrepository.com/artifact/com.twitter/chill-akka
 libraryDependencies += "com.twitter" % "chill_2.12" % TwitterChillVersion
-libraryDependencies += "com.twitter" % "chill-akka_2.12" %  TwitterChillVersion
+libraryDependencies += "com.twitter" % "chill-akka_2.12" % TwitterChillVersion
 
 libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.2" % Test
-libraryDependencies += "com.github.t3hnar" %% "scala-bcrypt" % "4.0"
-// https://mvnrepository.com/artifact/org.bitbucket.b_c/jose4j
-libraryDependencies += "org.bitbucket.b_c" % "jose4j" % "0.6.5"
-// https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
+libraryDependencies += "com.github.t3hnar" %% "scala-bcrypt" % "4.1"
+libraryDependencies += "org.bitbucket.b_c" % "jose4j" % "0.7.0"
 libraryDependencies += "com.sendgrid" % "sendgrid-java" % "4.4.1"
 
 libraryDependencies += "org.jsoup" % "jsoup" % "1.11.3"
 
-libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.7"
+libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.9"
 libraryDependencies += "org.apache.commons" % "commons-email" % "1.5"
+libraryDependencies += "org.apache.poi" % "poi" % "4.1.1"
+
 libraryDependencies += "commons-io" % "commons-io" % "2.6"
 libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "3.12.1"
 
 
 libraryDependencies ++= Seq(
-  "com.typesafe.slick" %% "slick" % "3.3.1",
-  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.1",
-  "org.postgresql" % "postgresql" % "42.2.5" //org.postgresql.ds.PGSimpleDataSource dependency
+  "com.typesafe.slick" %% "slick" % "3.3.2",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
+  "org.postgresql" % "postgresql" % "42.2.9" //org.postgresql.ds.PGSimpleDataSource dependency
 )
 
 resolvers ++= Seq(
-  "Typesafe repository snapshots" at "http://repo.typesafe.com/typesafe/snapshots/",
-  "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
-  "Typesafe repository releases" at "http://repo.typesafe.com/typesafe/releases/",
-  "softprops-maven" at "http://dl.bintray.com/content/softprops/maven",
-  "Brando Repository" at "http://chrisdinn.github.io/releases/",
+  "Typesafe repository snapshots" at "https://repo.typesafe.com/typesafe/snapshots/",
+  "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases",
+  "Typesafe repository releases" at "https://repo.typesafe.com/typesafe/releases/",
+  "softprops-maven" at "https://dl.bintray.com/content/softprops/maven",
+  "Brando Repository" at "https://chrisdinn.github.io/releases/",
   "Sonatype repo" at "https://oss.sonatype.org/content/groups/scala-tools/",
-  "Sonatype releases" at "https://oss.sonatype.org/content/repository/releases",
-  "Sonatype snapshots" at "https://oss.sonatype.org/content/repository/snapshots",
-  "Sonatype staging" at "http://oss.sonatype.org/content/repository/staging",
-  "Java.net Maven2 Repository" at "http://download.java.net/maven/2/",
-  "Twitter Repository" at "http://maven.twttr.com",
+  "Sonatype releases" at "https://oss.sonatype.org/content/repositories/releases",
+  "Sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
+  "Sonatype staging" at "https://oss.sonatype.org/content/repositories/staging",
+  "Java.net Maven2 Repository" at "https://download.java.net/maven/2/",
+  "Twitter Repository" at "https://maven.twttr.com",
   "Websudos releases" at "https://dl.bintray.com/websudos/oss-releases/",
   "Goose Updates " at "https://dl.bintray.com/raisercostin/maven/",
   Resolver.sonatypeRepo("releases"),

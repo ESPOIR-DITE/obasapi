@@ -56,4 +56,6 @@ object APPKeys {
 
   def COMPLETE = "Complete"
 
+  def MATRIC_APPLICANT_TYPE = "Matric Applicant"
+
 }

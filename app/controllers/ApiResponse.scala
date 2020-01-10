@@ -1,15 +1,25 @@
 package controllers
 
+import java.io.File
+import java.nio.file.attribute.PosixFilePermission.{OWNER_READ, OWNER_WRITE}
+import java.nio.file.attribute.PosixFilePermissions
+import java.nio.file.{Files, Path}
+
+import akka.stream.IOResult
+import akka.stream.scaladsl.FileIO
 import domain.log.LogEvent
 import domain.util.events.Events
 import domain.util.exeptions.TokenFailException
 import io.circe.Encoder
 import io.circe.syntax._
 import javax.inject.Inject
-import play.api.{Logger, Logging}
 import play.api.http.ContentTypes
 import play.api.libs.json.{JsPath, JsonValidationError}
+import play.api.libs.streams.Accumulator
+import play.api.mvc.MultipartFormData.FilePart
 import play.api.mvc.{AbstractController, ControllerComponents, Result}
+import play.api.{Logger, Logging}
+import play.core.parsers.Multipart.{FileInfo, FilePartHandler}
 import services.log.LogEventService
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -52,6 +62,17 @@ class ApiResponse @Inject()(cc: ControllerComponents) extends AbstractController
         LogEventService.apply.saveEntity(log)
         InternalServerError
     }
+  }
+
+  def handleFilePartAsFile: FilePartHandler[File] = {
+    case FileInfo(partName, filename, contentType, dispositionType) =>
+      val attr = PosixFilePermissions.asFileAttribute(java.util.EnumSet.of(OWNER_READ, OWNER_WRITE))
+      val path: Path = Files.createTempFile("multipartBody", "tempFile", attr)
+      Accumulator(FileIO.toPath(path)).map {
+        case IOResult(count, status) =>
+          logger.info(s"count = $count, status = $status")
+          FilePart(partName, filename, contentType, path.toFile, count, dispositionType)
+      }
   }
 
 }

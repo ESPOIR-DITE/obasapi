@@ -28,4 +28,6 @@ class ApplicantTypeRepositoryImpl extends ApplicantTypeRepository{
   override def createTable: Future[Boolean] = {
     Future.successful(ApplicantTypeTable.createTable)
   }
+
+  override def getMatricApplicantType: Future[Option[ApplicantType]] = ApplicantTypeTable.getMatricApplicantType
 }

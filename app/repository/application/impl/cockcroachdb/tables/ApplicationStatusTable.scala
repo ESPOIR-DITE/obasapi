@@ -83,9 +83,9 @@ object UserApplicationStatusTable extends TableQuery(new UserApplicationStatusTa
       .map(_.sorted(ApplicationStatus.orderByDateTime)).map(_.headOption)
   }
 
-  def saveEntity(userAddress: ApplicationStatus): Future[Option[DomainObject]] = {
+  def saveEntity(applicationStatus: ApplicationStatus): Future[Option[DomainObject]] = {
     db.run(
-      (this returning this).insertOrUpdate(userAddress)
+      (this returning this).insertOrUpdate(applicationStatus)
     )
   }
 

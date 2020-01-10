@@ -31,6 +31,8 @@ class ApplicationRouter @Inject()(
       applicantTypeController.getAllApplicantType
     case GET(p"/applicanttype/get/$applicantTypeId") =>
       applicantTypeController.getApplicantTypeById(applicantTypeId)
+    case GET(p"/applicanttype/getmatric") =>
+      applicantTypeController.getMatricApplicantType
     case POST(p"/applicanttype/create") =>
       applicantTypeController.create
     case POST(p"/applicanttype/update") =>

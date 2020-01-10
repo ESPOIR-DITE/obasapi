@@ -1,6 +1,7 @@
 package domain.util.generic
 
 import play.api.libs.json.Json
+import util.HelperUtil
 
 case class GenericStatus(
                    id: String,
@@ -10,6 +11,6 @@ case class GenericStatus(
 
 object GenericStatus {
   implicit val genericStatusFmt = Json.format[GenericStatus]
-  def build(name: String) = GenericStatus("", name)
+  def build(name: String) = GenericStatus(HelperUtil.codeGen(name), name)
 }
 

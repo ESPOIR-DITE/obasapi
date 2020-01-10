@@ -62,6 +62,15 @@ class ApplicantTypeController @Inject()
       api.requestResponse[Option[DomainObject]](response, className)
   }
 
+  def getMatricApplicantType: Action[AnyContent] = Action.async {
+    implicit request: Request[AnyContent] =>
+      logger.info("Retrieve by matic applicant")
+      val response: Future[Option[DomainObject]] = for {
+        results <- domainService.getMatricApplicantType
+      } yield results
+      api.requestResponse[Option[DomainObject]](response, className)
+  }
+
   def getAllApplicantType: Action[AnyContent] = Action.async {
     implicit request: Request[AnyContent] =>
       logger.info("Retrieve all requested")

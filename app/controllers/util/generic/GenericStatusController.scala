@@ -28,8 +28,9 @@ class GenericStatusController @Inject()
       logger.info("Create request with body: " + entity)
       entity match {
         case Right(value) =>
+          val copy = value.copy(id = HelperUtil.codeGen(value.name))
           val response: Future[Option[DomainObject]] = for {
-            results: Option[DomainObject] <- domainService.saveEntity(value)
+            results: Option[DomainObject] <- domainService.saveEntity(copy)
           } yield results
           api.requestResponse[Option[DomainObject]](response, className)
         case Left(error) => api.errorResponse(error, className)

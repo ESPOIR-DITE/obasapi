@@ -3,6 +3,7 @@ package repository.application.impl.cockcroachdb.tables
 import domain.application.ApplicantType
 import slick.jdbc.PostgresProfile.api._
 import slick.lifted.ProvenShape
+import util.APPKeys
 import util.connections.PgDBConnection
 import util.connections.PgDBConnection.driver
 
@@ -15,7 +16,7 @@ class ApplicantTypeTable(tag: Tag) extends Table[ApplicantType](tag, _tableName 
 
   def name: Rep[String] = column[String]("name")
 
-  def description: Rep[Option[String]] = column[Option[String]]("description")
+  def description: Rep[String] = column[String]("description")
 
   override def * : ProvenShape[ApplicantType] = (id, name, description) <> ((ApplicantType.apply _).tupled, ApplicantType.unapply)
 }
@@ -31,6 +32,10 @@ object ApplicantTypeTable extends TableQuery(new ApplicantTypeTable(_)) {
     db.run(
       (this returning this).insertOrUpdate(applicantType)
     )
+  }
+
+  def getMatricApplicantType: Future[Option[ApplicantType]] = {
+    db.run(this.filter(_.name.trim === APPKeys.MATRIC_APPLICANT_TYPE).result).map(_.headOption)
   }
 
   def getEntities: Future[Seq[ApplicantType]] = {
