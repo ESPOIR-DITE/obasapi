@@ -4,6 +4,7 @@ import cats.kernel.Monoid
 import play.api.libs.json.Json
 
 case class DisbursementType(
+                           id : String,
                            disbursementType:String,
                            described: String
                            )

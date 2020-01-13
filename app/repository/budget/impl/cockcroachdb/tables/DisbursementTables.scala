@@ -23,12 +23,12 @@ object DisbursementTables extends TableQuery(new DisbursementTables(_)){
   def db: driver.api.Database = PgDBConnection.db
 
   def getEntity(id: String):Future[Option[Disbursement]] = {
-    db.run(this.filter(_.id ===id).result).map(_.headOption)
+    db.run(this.filter(_.id === id).result).map(_.headOption)
   }
 
   def saveEntity(disbursement: Disbursement): Future[Option[Disbursement]] = {
     db.run(
-    (this returning this).insertOrUpdate(Disbursement)
+    (this returning this).insertOrUpdate(disbursement)
     )
   }
   def getEntyties: Future[Seq[Disbursement]] = {
