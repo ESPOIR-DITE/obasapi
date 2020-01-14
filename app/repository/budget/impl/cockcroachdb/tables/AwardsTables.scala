@@ -1,7 +1,6 @@
 package repository.budget.impl.cockcroachdb.tables
 
 import java.time.LocalDateTime
-
 import domain.budget.Awards
 import slick.jdbc.PostgresProfile.api._
 import slick.lifted.ProvenShape

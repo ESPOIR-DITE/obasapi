@@ -13,11 +13,11 @@ object DisbursementRepositoryImpl extends DisbursementRepository{
   override def getEntities: Future[Seq[Disbursement]] =
     DisbursementTables.getEntyties
 
-  override def getEntity(id: String): Future[Option[Disbursement]] =
-    DisbursementTables.getEntity(id)
+  override def getEntity(id: String): Future[Option[Disbursement]] = ???
+    //DisbursementTables.getEntity(id)
 
   override def deleteEntity(entity: Disbursement): Future[Boolean] = {
-    DisbursementTables.deleteEntity(entity.id).map(_.isValidInt)
+    DisbursementTables.deleteEntity(entity.id).map(_.isValidInt)(....)
   }
 
   override def createTable: Future[Boolean] =
