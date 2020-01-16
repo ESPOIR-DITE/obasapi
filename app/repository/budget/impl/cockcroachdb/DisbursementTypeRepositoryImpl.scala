@@ -3,7 +3,7 @@ package repository.budget.impl.cockcroachdb
 import domain.budget.{Disbursement, DisbursementType}
 import repository.budget.{DisbursementRepository, DisbursementTypeRepository}
 import repository.budget.impl.cockcroachdb.tables.DisbursementTypeTable
-
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 object DisbursementTypeRepositoryImpl extends DisbursementTypeRepository {
@@ -13,9 +13,10 @@ object DisbursementTypeRepositoryImpl extends DisbursementTypeRepository {
     DisbursementTypeTable.getEntities
 
   override def getEntity(id: String): Future[Option[DisbursementType]] =
-  DisbursementTypeTable.saveEntity(id)
+  DisbursementTypeTable.getEntity(id)
   override def deleteEntity(entity: DisbursementType): Future[Boolean] =
-  DisbursementTypeTable.deleteEntity(entity.id) map (_.isValidInt)
+  DisbursementTypeTable.deleteEntity(entity.id).map (_.isValidInt)
+
   override def createTable: Future[Boolean] =
     Future.successful(DisbursementTypeTable.createTable)
 }
