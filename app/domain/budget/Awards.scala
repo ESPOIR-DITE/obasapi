@@ -1,9 +1,8 @@
 package domain.budget
 
 import java.time.LocalDateTime
+import cats.kernel.Monoid
 
-import cats.Monoid
-import play.api.libs.json.Json
 
 case class Awards(id: String,
                   email: String,
